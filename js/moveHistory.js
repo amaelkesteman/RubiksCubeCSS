@@ -1,4 +1,4 @@
-let move_history = []; // création du tableau
+const move_history = []; // Tableau existant
 
 export function displayMoveHistory() {
     // Créer un élément d'interface s'il n'existe pas déjà
@@ -17,15 +17,12 @@ export function displayMoveHistory() {
         historyElement.style.maxWidth = '200px';
         document.body.appendChild(historyElement);
     }
-
-    // Inverser la liste pour afficher les derniers mouvements en premier
-    const displayHistory = [...move_history].reverse();
     
     // Mettre à jour le contenu
     historyElement.innerHTML = `
         <h3>Move History</h3>
         <ul>
-            ${displayHistory.map(move => `<li>${move}</li>`).join('')}
+            ${move_history.map(move => `<li>${move}</li>`).join('')}
         </ul>
         <p>Total moves: ${move_history.length}</p>
     `;
@@ -35,14 +32,41 @@ export function displayMoveHistory() {
         historyElement.style.display === 'none' ? 'block' : 'block';
 }
 
-export function addToMoveHistory(key) {
-    move_history.push(key);
-}
-
-export function resetMoveHistory() {
-    move_history = [];
-}
-
-export function undoLastMove() {
-    move_history.pop();
-}
+node.addEventListener('keydown', function(event) {
+    const key = event.key;
+    
+    switch(key) {
+        // Rotations
+        case 'r':
+        case 'R':
+        case 'l':
+        case 'L':
+        case 't':
+        case 'T':
+        case 'd':
+        case 'D':
+        case 'f':
+        case 'F':
+        case 'b':
+        case 'B':
+        case 'e':
+        case 'E':
+        case 'm':
+        case 'M':
+        case 's':
+        case 'S':
+            move_history.push(key);
+            break;
+        
+        // Réinitialisation du tableau
+        case 'U': //reset le cube
+        case 'x': //melange le cube
+            move_history.length = 0;
+            break;
+        
+        // Annulation de la dernière rotation
+        case 'u':
+            move_history.pop();
+            break;
+    }
+});

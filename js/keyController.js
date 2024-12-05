@@ -5,7 +5,12 @@ import { undoRotation } from "./history.js";
 import { scrambleCube } from "./scrambleCube.js";
 import { resetCube } from "./resetCube.js";
 import { addToQueue } from "./rotationQueue.js";
-//import { displayMoveHistory } from "./moveHistory.js"; futur import
+import { 
+    displayMoveHistory, 
+    addToMoveHistory, 
+    resetMoveHistory, 
+    undoLastMove 
+} from "./moveHistory.js";
 
 const KEY_MAP = {
     ArrowRight: () => rotateCube("right"),

@@ -16,7 +16,7 @@ export function displayMoveHistory() {
         historyElement.style.padding = '5px';
         historyElement.style.width = '100%';
         historyElement.style.textAlign = 'center';
-        historyElement.style.fontSize = '12px';
+        historyElement.style.fontSize = '36px';
         historyElement.style.zIndex = '1000';
         document.body.appendChild(historyElement);
     }
@@ -57,7 +57,7 @@ document.addEventListener('keydown', function(event) {
         
         // Réinitialisation du tableau
         case 'U': //reset le cube
-        case 'x': //melange le cube
+        case 'X': //melange le cube
             move_history.length = 0;
             break;
         
@@ -66,5 +66,18 @@ document.addEventListener('keydown', function(event) {
             move_history.pop();
             break;
     }
+
     displayMoveHistory();
 });
+
+export function toggleMoveHistory(action) {
+    const historyElement = document.getElementById("move-history");
+
+    if (!historyElement) return;
+
+    if (action === "show") {
+        historyElement.style.display = "block";
+    } else if (action === "hide") {
+        historyElement.style.display = "none";
+    }
+}

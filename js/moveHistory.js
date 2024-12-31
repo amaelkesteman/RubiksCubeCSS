@@ -8,31 +8,28 @@ export function displayMoveHistory() {
         historyElement = document.createElement('div');
         historyElement.id = 'move-history';
         historyElement.style.position = 'fixed';
-        historyElement.style.top = '10px';
-        historyElement.style.right = '10px';
-        historyElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        historyElement.style.top = '0';
+        historyElement.style.left = '50%';
+        historyElement.style.transform = 'translateX(-50%)';
+        historyElement.style.backgroundColor = 'rgba(0,0,0,0.5)';
         historyElement.style.color = 'white';
-        historyElement.style.padding = '10px';
-        historyElement.style.borderRadius = '5px';
-        historyElement.style.maxWidth = '200px';
+        historyElement.style.padding = '5px';
+        historyElement.style.width = '100%';
+        historyElement.style.textAlign = 'center';
+        historyElement.style.fontSize = '12px';
+        historyElement.style.zIndex = '1000';
         document.body.appendChild(historyElement);
     }
     
     // Mettre à jour le contenu
-    historyElement.innerHTML = `
-        <h3>Move History</h3>
-        <ul>
-            ${move_history.map(move => `<li>${move}</li>`).join('')}
-        </ul>
-        <p>Total moves: ${move_history.length}</p>
-    `;
+    historyElement.innerHTML = move_history.join(' ');
 
     // Basculer la visibilité si déjà existant
     historyElement.style.display = 
         historyElement.style.display === 'none' ? 'block' : 'block';
 }
 
-node.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function(event) {
     const key = event.key;
     
     switch(key) {
@@ -69,4 +66,5 @@ node.addEventListener('keydown', function(event) {
             move_history.pop();
             break;
     }
+    displayMoveHistory();
 });
